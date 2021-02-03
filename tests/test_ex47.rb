@@ -1,22 +1,23 @@
-require "./lib/NAME.rb"
+require "./lib/ex47.rb"
 require "test/unit"
+require "ex47/game.rb"
 
-class TestNAME < Test::Unit::TestCase
+class TestGame < Test::Unit::TestCase
 
     def test_room()
         gold = Room.new("GoldRoom", """This Room has gold in it you can grab. there's a door to the North.""")
-        assert_equals("GoldRoom", gold.name)
-        assert_equals({}, gold.paths)
+        assert_equal("GoldRoom", gold.name)
+        assert_equal({}, gold.paths)
     end
     
     def test_room_paths()
         center = Room.new("Center", "Test room in the centre.")
         north = Room.new("North", "Test room in the north.")
-        sound = Room.new("South", "Test room in the south.")
+        south = Room.new("South", "Test room in the south.")
 
-        centre.add_paths({'North'=> north, 'south'=> south})
-        assert_equals(north, center.go('north'))
-        assert_equals(south, center.go('south'))
+        center.add_paths({'North'=> north, 'South'=> south})
+        assert_equal(north, center.go('North'))
+        assert_equal(south, center.go('South'))
     end
 
     def test_map()
@@ -28,8 +29,8 @@ class TestNAME < Test::Unit::TestCase
         west.add_paths({"East"=> start})
         down.add_paths({"Up"=> start})
 
-        assert_equals(west, start.go('West'))
-        assert_equals(start, start.go('West').go('East'))
-        assert_equals(start, start.go('Down').go("Up"))
+        assert_equal(west, start.go('West'))
+        assert_equal(start, start.go('West').go('East'))
+        assert_equal(start, start.go('Down').go("Up"))
     end
 end
